@@ -5,9 +5,26 @@ from pages import neural_page,regres_page, desc_page
 
 from navigator import Navigator
 
+# from loadFiles import telemetry_df,errors_df,maint_df,failures_df,machines_df
+from loadFiles import get_data
+
+
+
+# data = {
+#     "telemetry_df": telemetry_df,
+#     "errors_df": errors_df,
+#     "maint_df": maint_df,
+#     "failures_df": failures_df,
+#     "machines_df": machines_df
+# }
+
+with st.spinner('Încarcarea Datelor'):
+    data = get_data()
+
 
 
 app = Navigator()
+
 
 st.title("UTM - Gestionarea stării tehnice utilizând metode de data mining")
 
@@ -17,7 +34,7 @@ app.add_page("Retele Neuronale", neural_page.app)
 
 
 # The main app
-app.run()
+app.run(data)
 
 
 # telemetry_df['datetime'] = pd.to_datetime(telemetry_df["datetime"])

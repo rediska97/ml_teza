@@ -23,9 +23,9 @@ class Navigator:
                 "function": func
             })
 
-    def run(self):
+    def run(self,data):
         # Drodown to select the page to run  
-        
+
         page = st.sidebar.radio(
             'Selectati pagina', 
             self.pages, 
@@ -33,4 +33,4 @@ class Navigator:
         )
 
         # run the app function 
-        page['function']()
+        page['function'](data)

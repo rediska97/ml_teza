@@ -15,12 +15,13 @@ def get_data():
     for df in tables:
         df["datetime"] = pd.to_datetime(df["datetime"], format="%Y-%m-%d %H:%M:%S")
         df.sort_values(["datetime", "machineID"], inplace=True, ignore_index=True)
-    return tables
+     
+    data = {
+        "telemetry_df": telemetry_df,
+        "errors_df": errors_df,
+        "maint_df": maint_df,
+        "failures_df": failures_df,
+        "machines_df": pd.read_csv(f"data/pdm/PdM_machines.csv")
+    }
 
-all_tables = get_data()
-
-telemetry_df = all_tables[0]
-maint_df = all_tables[1]
-failures_df = all_tables[2]
-errors_df = all_tables[3]
-machines_df = pd.read_csv(f"data/pdm/PdM_machines.csv")
+    return data

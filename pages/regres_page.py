@@ -4,10 +4,16 @@ import pandas as pd
 import regression as regr
 
 import streamlit as st
-from loadFiles import telemetry_df,errors_df,maint_df,failures_df,machines_df
 
 
-def app():
+def app(params):
+    errors_df = params["errors_df"]
+    machines_df = params["machines_df"]
+    maint_df = params["maint_df"]
+    failures_df = params["failures_df"]
+    telemetry_df = params["telemetry_df"]
+
+
     erros_across_machine = errors_df.groupby("machineID").size()
 
     erros_across_machine = pd.DataFrame(erros_across_machine, columns=["num_errors"]).reset_index()
