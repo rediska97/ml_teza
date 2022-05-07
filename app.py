@@ -23,15 +23,14 @@ with st.spinner('Încarcarea Datelor'):
 
 st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
 st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
+st.sidebar.title("Navigare")
 
 app = Navigator()
-
 
 app.add_page("Descriere", desc_page.app)
 app.add_page("Regresie", regres_page.app)
 app.add_page("Retele Neuronale", neural_page.app)
 app.add_page("Analiza ABC", abc_page.app)
-
 
 # The main app
 app.run(data)

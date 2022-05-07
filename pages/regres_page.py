@@ -38,6 +38,8 @@ def app(params):
     # querry_data = telemetry_df.join(failures_df.set_index(['datetime','machineID']), on=['datetime','machineID'])
     # querry_data = querry_data.groupby(querry_data['failure'])
 
+
+
     def drawRegressChart(x,y,title = "Titlul grafic"):
         y_pred = regr.lin_regress(x,y)
         plt.scatter(x,y)
@@ -60,9 +62,13 @@ def app(params):
     plot2 = plt.figure()
     x = machines_errors_df[['age']]
     y = machines_errors_df[['num_maint']]
+    titlu = "numarul de interventii(mentenanta) pe ani"
     drawRegressChart(x,y)
 
 
+    querry3 = maint_df.groupby('comp').count()
+
+    st.write(querry3)
     # plot3 = plt.figure()
     # x=querry_data[['volt']]
     # y=machines_errors_df[['num_errors']]

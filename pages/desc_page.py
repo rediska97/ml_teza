@@ -11,10 +11,10 @@ def app(params):
     st.title("UTM - Gestionarea stării tehnice utilizând metode de data mining")
     st.write('''
     **Datele necesare pentru o mentenanță predictivă ar putea fi:**
-    \nStarea automobilului - *Este descrisă starea de lucru a mașinei cu ajutorul datelor colectate de la senzori*
-    \nIstoricul defecțiunilor - *Istoricul defecțiunilor unei mașini sau componente din cadrul mașinii.*
-    \nIstoricul întreținerii - *Istoricul reparațiilor unei mașini, de exemplu coduri de eroare, activități de întreținere anterioare sau înlocuirea cărorva componente.*
-    \nCaracteristicile mașinii: *caracteristicile unei mașini, de exemplu, dimensiunea motorului, marca și modelul, locația anul.*
+    \n* **Starea automobilului** - Este descrisă starea de lucru a mașinei cu ajutorul datelor colectate de la senzori*
+    \n* **Istoricul defecțiunilor** - Istoricul defecțiunilor unei mașini sau componente din cadrul mașinii.*
+    \n* **Istoricul întreținerii** - Istoricul reparațiilor unei mașini, de exemplu coduri de eroare, activități de întreținere anterioare sau înlocuirea cărorva componente.*
+    \n* **Caracteristicile mașinii** -caracteristicile unei mașini, de exemplu, dimensiunea motorului, marca și modelul, locația anul.*
     ''')
 
     st.subheader("Datele propuse spre analiză")
