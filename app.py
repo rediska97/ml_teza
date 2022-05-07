@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-from pages import neural_page,regres_page, desc_page
+from pages import neural_page,regres_page, desc_page, abc_page
 
 from navigator import Navigator
 
@@ -21,16 +21,16 @@ from loadFiles import get_data
 with st.spinner('Încarcarea Datelor'):
     data = get_data()
 
-
+st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
+st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
 
 app = Navigator()
 
 
-st.title("UTM - Gestionarea stării tehnice utilizând metode de data mining")
-
 app.add_page("Descriere", desc_page.app)
 app.add_page("Regresie", regres_page.app)
 app.add_page("Retele Neuronale", neural_page.app)
+app.add_page("Analiza ABC", abc_page.app)
 
 
 # The main app

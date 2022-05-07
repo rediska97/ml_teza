@@ -8,9 +8,9 @@ def app(params):
     failures_df = params["failures_df"]
     telemetry_df = params["telemetry_df"]
 
-    
+    st.title("UTM - Gestionarea stării tehnice utilizând metode de data mining")
     st.write('''
-    **Datele necesare pentru o mentenanță predictivă ar putea fi.**
+    **Datele necesare pentru o mentenanță predictivă ar putea fi:**
     \nStarea automobilului - *Este descrisă starea de lucru a mașinei cu ajutorul datelor colectate de la senzori*
     \nIstoricul defecțiunilor - *Istoricul defecțiunilor unei mașini sau componente din cadrul mașinii.*
     \nIstoricul întreținerii - *Istoricul reparațiilor unei mașini, de exemplu coduri de eroare, activități de întreținere anterioare sau înlocuirea cărorva componente.*
@@ -31,10 +31,11 @@ def app(params):
         st.write('**Metadatele automobilelor** *machines* - Modelul și vârsta .')
         
 
-    st.write('**Tabelul Errori**, numarul de înregistrări:', errors_df.size)
+    st.write('**Tabelul Errori**, numarul de înregistrări:', errors_df.shape[0])
     if st.button('Arata tabelul', key = 'errors'):
         st.write(errors_df.sample(100))
     
+
     st.download_button(
         label="Descarca tabelul",
         data=errors_df.to_csv(index=False).encode('utf-8'),
@@ -42,30 +43,33 @@ def app(params):
         mime='text/csv',
     )
 
-    st.write('**Tabelul Maintenance**, numarul de înregistrări:', maint_df.size)
+    st.write('**Tabelul Maintenance**, numarul de înregistrări:', maint_df.shape[0])
     if st.button('Arata tabelul',key = 'maintenance'):
         st.write(maint_df.sample(100))
     
+
     st.download_button(
         label="Descarca tabelul",
         data=maint_df.to_csv(index=False).encode('utf-8'),
         file_name='maintenance.csv',
         mime='text/csv',
     )
-    st.write('**Tabelul Esecuri**, numarul de înregistrări:', failures_df.size)
+    st.write('**Tabelul Esecuri**, numarul de înregistrări:', failures_df.shape[0])
     if st.button('Arata tabelul', key = 'failures'):
         st.write(failures_df.sample(100))
-    
+
+
     st.download_button(
         label="Descarca tabelul",
         data=failures_df.to_csv(index=False).encode('utf-8'),
         file_name='failures.csv',
         mime='text/csv',
     )
-    st.write('**Tabelul Masini**, numarul de înregistrări:', machines_df.size)
+    st.write('**Tabelul Masini**, numarul de înregistrări:', machines_df.shape[0])
     if st.button('Arata tabelul', key = 'machines'):
         st.write(machines_df.sample(100))
-    
+
+
     st.download_button(
         label="Descarca tabelul",
         data=machines_df.to_csv(index=False).encode('utf-8'),
@@ -73,14 +77,17 @@ def app(params):
         mime='text/csv',
     )
 
-    st.write('**Tabelul (Telemetrie)**, numarul de înregistrări:' , telemetry_df.size)
+    st.write('**Tabelul (Telemetrie)**, numarul de înregistrări:' , telemetry_df.shape[0])
     
     if st.button('Arata tabelul',key = 'telemetry'):
         st.write(telemetry_df.sample(100))
+
+
+    # with st.spinner('Preparing data to download'):
+    #     st.download_button(
+    #     label="Descarca tabelul",
+    #     data=telemetry_df.to_csv(index=False).encode('utf-8'),
+    #     file_name='Telemetry.csv',
+    #     mime='text/csv',
+    # )
     
-    st.download_button(
-        label="Descarca tabelul",
-        data=telemetry_df.to_csv(index=False).encode('utf-8'),
-        file_name='Telemetry.csv',
-        mime='text/csv',
-    )
