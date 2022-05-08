@@ -5,7 +5,6 @@ from pages import neural_page,regres_page, desc_page, abc_page
 
 from navigator import Navigator
 
-# from loadFiles import telemetry_df,errors_df,maint_df,failures_df,machines_df
 from loadFiles import get_data
 
 appstate = st.session_state
@@ -25,8 +24,8 @@ st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
 st.sidebar.title("Navigare")
 
 app = Navigator()
-app.add_page("Analiza ABC", abc_page.app)
 app.add_page("Descriere", desc_page.app)
+app.add_page("Analiza ABC", abc_page.app)
 app.add_page("Regresie", regres_page.app)
 app.add_page("Retele Neuronale", neural_page.app)
 
