@@ -12,112 +12,26 @@ appstate = st.session_state
 st.sidebar.write("streamlite session state vars", st.session_state)
 
 
-if 'loadFromFiles' not in appstate:
-    with st.spinner('Încarcarea Datelor'):
-        x = get_data()
-
-if 'loadFromFiles' in appstate:
-
-        st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
-        st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
-        st.sidebar.title("Navigare")
-
-        app = Navigator()
-
-        app.add_page("Descriere", desc_page.app)
-        app.add_page("Regresie", regres_page.app)
-        app.add_page("Retele Neuronale", neural_page.app)
-        app.add_page("Analiza ABC", abc_page.app)
-
-        # The main app
-        app.run()
+with st.spinner('Încarcarea Datelor'):
+    x = get_data()
+    appstate.telemetry_df = x["telemetry_df"]
+    appstate.errors_df = x["errors_df"]
+    appstate.maint_df = x["maint_df"]
+    appstate.failures_df = x["failures_df"]
+    appstate.machines_df = x["machines_df"]
 
 
+    st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
+    st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
+    st.sidebar.title("Navigare")
 
-# telemetry_df['datetime'] = pd.to_datetime(telemetry_df["datetime"])
-# telemetry_df['datetime'] = telemetry_df['datetime'].map(dt.datetime.toordinal)
+    app = Navigator()
 
+    app.add_page("Descriere", desc_page.app)
+    app.add_page("Regresie", regres_page.app)
+    app.add_page("Retele Neuronale", neural_page.app)
+    app.add_page("Analiza ABC", abc_page.app)
 
-# x = telemetry_df[['datetime']]
-# x 
-# y = telemetry_df[['vibration']]
-# y
-
-
-
-
-
-
-# X = date[['temp', 'rpm', 'voltage']].values
-
-# Y = date['starea'].values
-
-# x=date[['temp']]
-# y=date[['starea']]
-
-# linear_regressor = LinearRegression()  # create object for the class
-# linear_regressor.fit(x, y)  # perform linear regression
-# Y_pred = linear_regressor.predict(x)  # make predictions
-
-
-# plt.scatter(x, y)
-# 
-# plt.show()
-# st.pyplot(plt)
-
-
-# import streamlit as st
-# import utils as utl
-# from views import home,predict
-
-
-
-# def navigation():
-#     route = utl.get_current_route()
-#     if route == "home":
-#         home.load_view()
-#     elif route == "predict":
-#         predict.load_view()
-#     elif route == "analysis":
-#         analysis.load_view()
-#     elif route == "options":
-#         options.load_view()
-#     elif route == "configuration":
-#         configuration.load_view()
-#     elif route == None:
-#         home.load_view()
-        
-# navigation()
-
-# PAGES = {
-#     "Train": "app1",
-#     "Predict": "app2"
-# }
-
-# st.sidebar.title('Navigation')
-# st.sidebar.selectbox("Go To", list(PAGES.keys()))
-
-# selection = st.sidebar.radio("Go to", list(PAGES.keys()))
-# page = PAGES[selection]
-# page.app()
-
-
-# with st.sidebar:
-#     selected = option_men
-
-# pages = {'Descrierea Datelor':'about_data','Posting':'posting'}
-# choice = st.sidebar.radio("Pagina: ",tuple(pages.keys()))
-
-# 'choice>>>',choice
-# # pages[choice]()
-
-# if(choice == 'about_data'):
-#     'page1'
-# elif (choice == 'posting'):
-#     'page2'
-# else:
-#     'error'
-
-
-
+    # The main app
+    app.run()
 
