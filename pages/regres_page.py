@@ -36,6 +36,7 @@ def app():
     machines_errors_df = pd.merge(machines_errors_df, failure_across_machine, how='left', on="machineID")
 
     st.write(machines_errors_df)
+    st.write("tabelul de corelatie", machines_errors_df.corr())
 
 
     def drawRegressChart(x,y,title = "Titlul grafic"):
