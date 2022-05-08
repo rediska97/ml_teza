@@ -6,16 +6,15 @@ import numpy as np
 
 from sklearn.preprocessing import MinMaxScaler
 
-def app(params):
-    errors_df = params["errors_df"]
-    machines_df = params["machines_df"]
-    maint_df = params["maint_df"]
-    failures_df = params["failures_df"]
-    telemetry_df = params["telemetry_df"]
-
+def app():
     appstate = st.session_state
+    
+    errors_df = appstate.errors_df
+    machines_df = appstate.machines_df
+    maint_df = appstate.maint_df
+    failures_df = appstate.failures_df
+    telemetry_df = appstate.telemetry_df
 
-    # st.sidebar.write("streamlite session state vars", st.session_state)
 
 
     # LEFT JOIN la tabelul TELEMETRY cu FAILURES
@@ -188,4 +187,6 @@ def app(params):
                                 input_pressure_norm,
                                 input_vibration_norm]])
                     
-                    st.write(prediction)
+                    st.write('''Ca rezultat ne va fi returnat un tabel unde ne este indicat carei clase ii 
+                    apartine starea selectata. Pentru a putea descifra, ne uitam numarul la coloana din 
+                    tabelul rezultat, cu tabelul normalizat **Y**.''',prediction)

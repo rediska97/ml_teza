@@ -16,12 +16,10 @@ def get_data():
         df["datetime"] = pd.to_datetime(df["datetime"], format="%Y-%m-%d %H:%M:%S")
         df.sort_values(["datetime", "machineID"], inplace=True, ignore_index=True)
      
-    data = {
-        "telemetry_df": telemetry_df,
-        "errors_df": errors_df,
-        "maint_df": maint_df,
-        "failures_df": failures_df,
-        "machines_df": pd.read_csv(f"data/pdm/PdM_machines.csv")
-    }
+    st.session_state.telemetry_df = telemetry_df
+    st.session_state.errors_df = errors_df 
+    st.session_state.maint_df = maint_df
+    st.session_state.failures_df = failures_df
+    st.session_state.machines_df = pd.read_csv(f"data/pdm/PdM_machines.csv")
+    st.session_state.loadFromFiles = True
 
-    return data

@@ -1,4 +1,3 @@
-
 import streamlit as st
 
 # Define the multipage class to manage the multiple apps in our program 
@@ -23,7 +22,7 @@ class Navigator:
                 "function": func
             })
 
-    def run(self,data):
+    def run(self):
         # Drodown to select the page to run  
 
         page = st.sidebar.radio(
@@ -33,4 +32,4 @@ class Navigator:
         )
 
         # run the app function 
-        page['function'](data)
+        page['function']()
