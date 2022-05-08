@@ -65,5 +65,10 @@ def app():
 
 
     querry = maint_df.join(machines_df.set_index(['machineID']), on=['machineID'])
-    st.write(querry)
-        # querry_data = telemetry_df.join(failures_df.set_index(['datetime','machineID']), on=['datetime','machineID'])
+    querry_grouped = querry.groupby(['age'])['comp'].count().reset_index()
+
+    plot3 = plt.figure()
+    x = querry_grouped[['age']]
+    y = querry_grouped[['comp']]
+    titlu = "Numarul de componente schimbate, in dependenta de varsta masinii"
+    drawRegressChart(x,y,titlu)
