@@ -9,7 +9,6 @@ from navigator import Navigator
 from loadFiles import get_data
 
 appstate = st.session_state
-st.sidebar.write("streamlite session state vars", st.session_state)
 
 
 with st.spinner('Încarcarea Datelor'):
@@ -21,17 +20,16 @@ with st.spinner('Încarcarea Datelor'):
     appstate.machines_df = x["machines_df"]
 
 
-    st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
-    st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
-    st.sidebar.title("Navigare")
+st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
+st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
+st.sidebar.title("Navigare")
 
-    app = Navigator()
+app = Navigator()
+app.add_page("Analiza ABC", abc_page.app)
+app.add_page("Descriere", desc_page.app)
+app.add_page("Regresie", regres_page.app)
+app.add_page("Retele Neuronale", neural_page.app)
 
-    app.add_page("Descriere", desc_page.app)
-    app.add_page("Regresie", regres_page.app)
-    app.add_page("Retele Neuronale", neural_page.app)
-    app.add_page("Analiza ABC", abc_page.app)
 
-    # The main app
-    app.run()
-
+# The main app
+app.run()
