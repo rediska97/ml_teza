@@ -133,25 +133,30 @@ def app():
                 if 'model' in appstate:
                     del appstate.model
 
-
                 model = Sequential()
                 appstate.model = model
                 # create model
-                model.add(Dense(12, input_dim=4, activation='relu'))
+                model.add(Dense(16, input_dim=4, activation='relu'))
                 model.add(Dense(8, activation='relu'))
-                model.add(Dense(5, activation='sigmoid')) ##ultimul sloi sigmoid / softmax
+                model.add(Dense(5, activation=appstate.out_activate_func)) ##ultimul sloi sigmoid / softmax
 
                 # Compile model
                 # model.compile(optimizer='adam', loss=SparseCategoricalCrossentropy(from_logits=True),metrics=['accuracy'])
-                model.compile(loss='categorical_crossentropy', optimizer='adam',metrics=['accuracy'])
+                model.compile(loss='categorical_crossentropy', optimizer=appstate.optimize_func,metrics=['accuracy'])
                 # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
                 # model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
                 # model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])
-                model.fit(appstate.enc_train_X, appstate.enc_train_Y, epochs=300, batch_size=64,  verbose=0)
+                model.fit(appstate.enc_train_X, appstate.enc_train_Y, epochs=appstate.epoch_numbers, batch_size=appstate.batch_size,  verbose=0)
                 appstate.model = model
 
             
             with st.form(key= 'train_model'):
+                st.info("introduceti parametrii de configurare doriti")
+                st.number_input(label = "Numarul de epoci", value=60, step=1, key='epoch_numbers')
+                st.number_input(label = "Marimea setului de date / epoca", value=24, step=1, key='batch_size')
+                st.radio(label="functia de activare la iesire", options=('sigmoid','softmax'), key='out_activate_func')
+                st.radio(label="functia de optimizare", options= ('adam','sgd'), key ='optimize_func')
+
                 if 'model' in appstate:
                     model = appstate.model
                     with st.spinner('Antrenarea Modelului creat Datelor si prezicerea starii'):
@@ -159,8 +164,7 @@ def app():
                         st.write("Denumire Metriciii", model.metrics_names[1])
                         st.write("Test loss:",test_loss)
                         st.write("Test Accuracy:",test_acc)
-
-                st.form_submit_button(label="Antrenarea retelei", on_click=trainModelCallback)
+                button = st.form_submit_button(label="Antrenarea retelei", on_click=trainModelCallback)
 
 
             with st.form("introducerea valorilor pentru prezicere"):
