@@ -20,20 +20,18 @@ def app():
     erros_across_machine = errors_df.groupby("machineID").size()
     erros_across_machine = pd.DataFrame(erros_across_machine, columns=["num_errors"]).reset_index()
 
-    
+    st.write('errors_accros_machine', erros_across_machine)
 
-    # Create a DF consisting of number of maintenance records across Machines
     maint_across_machine = maint_df.groupby("machineID").size()
     maint_across_machine = pd.DataFrame(maint_across_machine, columns=["num_maint"]).reset_index()
-    
 
-    # Create a DF consisting of number of failure records across Machines
     failure_across_machine = failures_df.groupby("machineID").size()
     failure_across_machine = pd.DataFrame(failure_across_machine, columns=["num_failure"]).reset_index()
 
     machines_errors_df = pd.merge(machines_df, erros_across_machine, how='left', on="machineID")
     machines_errors_df = pd.merge(machines_errors_df, maint_across_machine, how='left', on="machineID")
     machines_errors_df = pd.merge(machines_errors_df, failure_across_machine, how='left', on="machineID")
+    machines_errors_df = machines_errors_df.dropna()
 
     st.write(machines_errors_df)
     st.write("tabelul de corelatie", machines_errors_df.corr())
@@ -61,15 +59,31 @@ def app():
     plot2 = plt.figure()
     x = machines_errors_df[['age']]
     y = machines_errors_df[['num_maint']]
-    titlu = "numarul de interventii(mentenanta) in dependenta de virsta auto"
+    titlu = "Numarul de interventii(mentenanta) in dependenta de virsta auto"
     drawRegressChart(x,y,titlu)
 
 
     querry = maint_df.join(machines_df.set_index(['machineID']), on=['machineID'])
+    st.write(querry)
     querry_grouped = querry.groupby(['age'])['comp'].count().reset_index()
 
     plot3 = plt.figure()
+    x = machines_errors_df[['num_errors']]
+    y = machines_errors_df[['num_failure']]
+    titlu = "Numarul de erori in dependenta de numarul de defectiuni"
+    drawRegressChart(x,y,titlu)
+
+
+    
+    plot4 = plt.figure()
     x = querry_grouped[['age']]
     y = querry_grouped[['comp']]
     titlu = "Numarul de componente schimbate, in dependenta de varsta masinii"
     drawRegressChart(x,y,titlu)
+
+
+
+    querry_t2 = querry[querry['model'] == 'model3']
+    querry_t2 = querry_t2.groupby(['comp']).count().reset_index()
+    st.write(querry)
+    st.write(querry_t2)

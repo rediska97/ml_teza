@@ -35,7 +35,7 @@ def app():
 
     st.write('**Tabelul Errori**, numarul de înregistrări:', errors_df.shape[0])
     if st.button('Arata tabelul', key = 'errors'):
-        st.write(errors_df.sample(100))
+        st.write(errors_df)
     
 
     st.download_button(
@@ -47,7 +47,7 @@ def app():
 
     st.write('**Tabelul Maintenance**, numarul de înregistrări:', maint_df.shape[0])
     if st.button('Arata tabelul',key = 'maintenance'):
-        st.write(maint_df.sample(100))
+        st.write(maint_df)
     
 
     st.download_button(
@@ -58,7 +58,7 @@ def app():
     )
     st.write('**Tabelul Esecuri**, numarul de înregistrări:', failures_df.shape[0])
     if st.button('Arata tabelul', key = 'failures'):
-        st.write(failures_df.sample(100))
+        st.write(failures_df)
 
 
     st.download_button(

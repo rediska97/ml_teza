@@ -20,7 +20,6 @@ with st.spinner('Încarcarea Datelor'):
 
 
 st.sidebar.caption("Elaborat de: Boronciuc Andrei masterand MAI-201M")
-st.sidebar.caption("Cu suportul: Perebinos Mihail dr.conf.univ")
 st.sidebar.title("Navigare")
 
 app = Navigator()
